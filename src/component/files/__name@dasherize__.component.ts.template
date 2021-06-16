@@ -1,0 +1,19 @@
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';<% if (form) { %>
+import { FormBuilder, FormGroup } from '@angular/forms';<% } %>
+
+@Component({
+  selector: 'ni-<%= dasherize(name) %>',
+  templateUrl: './<%= dasherize(name) %>.component.html',
+  styleUrls: ['./<%= dasherize(name) %>.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class <%= classify(name) %>Component implements OnInit {<% if (form) { %>
+  <%= (form) %>Form: FormGroup;<% } %>
+
+  constructor(<% if (form) { %>private fb: FormBuilder<% } %>) { }
+
+  ngOnInit(): void {<% if (form) { %>
+    this.<%= (form) %>Form = this.fb.group({
+    });<% } %>
+  }
+}

@@ -1,0 +1,3 @@
+<p><%= dasherize(name) %> works!</p><% if (form) { %>
+<form [formGroup]="<%= (form) %>Form">
+</form><% } %>

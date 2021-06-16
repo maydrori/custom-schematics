@@ -1,0 +1,10 @@
+import { Injectable } from '@angular/core';<% if (http) { %>
+import { HttpClient } from '@angular/common/http';<% } %>
+
+@Injectable({
+  providedIn: 'root'
+})
+export class <%= classify(name) %>Service {
+
+  constructor(<% if (http) { %>private httpClient: HttpClient<% } %>) { }
+}

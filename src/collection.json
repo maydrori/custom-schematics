@@ -1,0 +1,15 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "service": {
+      "description": "Create angular service",
+      "factory": "./service/index#service",
+      "schema": "./service/schema.json"
+    },
+    "component": {
+      "description": "Create angular component",
+      "factory": "./component/index#component",
+      "schema": "./component/schema.json"
+    }
+  }
+}
