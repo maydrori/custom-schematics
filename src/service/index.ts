@@ -1,28 +1,37 @@
 import {
   apply,
   applyTemplates,
-  MergeStrategy, mergeWith,
-  move,
-  Rule,
-  SchematicContext,
-  Tree,
+  chain,
+  externalSchematic,
+  MergeStrategy,
+  mergeWith, move,
+  Rule, Tree,
   url
 } from '@angular-devkit/schematics';
-import { setProjectOptions } from '../helpers/set-project-options';
 import { strings } from '@angular-devkit/core';
+import { ServiceOptions } from './models/service-options.model';
+import { setProjectOptions } from '../helpers/set-project-options';
 
-export function service(_options: any): Rule {
-  return async (tree: Tree, _context: SchematicContext) => {
-    const options = await setProjectOptions(tree, _options);
+export function service(serviceOptions: ServiceOptions): Rule {
+  return async (tree: Tree) => {
+    const options = await setProjectOptions(tree, serviceOptions);
 
     const templateSource = apply(url('./files'), [
       applyTemplates({
-        ...strings,
-        ...options,
+        classify: strings.classify,
+        dasherize: strings.dasherize,
+        ...serviceOptions,
       }),
-      move(options.path),
+      move(options.path)
     ]);
 
-    return mergeWith(templateSource, MergeStrategy.Default);
+    return chain([
+      externalSchematic('@schematics/angular', 'service', {
+        name: options.name,
+        project: options.project,
+        path: options.path,
+      }),
+      mergeWith(templateSource, MergeStrategy.Overwrite)
+    ]);
   };
 }

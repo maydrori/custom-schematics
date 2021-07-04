@@ -26,7 +26,7 @@
       }
     },
     "http": {
-      "description": "Whether to inject the httpClient provider",
+      "description": "Inject httpClient",
       "type": "boolean",
       "default": false
     }

@@ -27,7 +27,11 @@ export function component(_options: any): Rule {
     ]);
 
     return chain([
-      externalSchematic('@schematics/angular', 'component', _options),
+      externalSchematic('@schematics/angular', 'component', {
+        name: _options.name,
+        project: _options.project,
+        path: _options.path,
+      }),
       mergeWith(templateSource, MergeStrategy.Overwrite)
     ]);
   };
