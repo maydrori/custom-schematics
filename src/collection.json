@@ -10,6 +10,11 @@
       "description": "Create angular component",
       "factory": "./component/index#component",
       "schema": "./component/schema.json"
+    },
+    "hello": {
+      "description": "A blank schematic.",
+      "factory": "./hello/index#hello",
+      "schema": "./hello/schema.json"
     }
   }
 }
