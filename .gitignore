@@ -9,7 +9,7 @@ jsconfig.json
 .vscode/
 
 # Misc
-my-schematics/node_modules/
+/node_modules
 npm-debug.log*
 yarn-error.log*
 
