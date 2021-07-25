@@ -1,39 +1,20 @@
-import {
-  apply,
-  applyTemplates,
-  chain,
-  externalSchematic,
-  MergeStrategy,
-  mergeWith,
-  move,
-  Rule,
-  Tree,
-  url
-} from '@angular-devkit/schematics';
-import { normalize, strings } from '@angular-devkit/core';
+import { Rule, Tree } from '@angular-devkit/schematics';
 import { setProjectOptions } from '../helpers/set-project-options';
+import { Schema } from './models/schema.model';
+import { deleteComponentRule } from './rules/delete-component.rule';
+import { renameComponentRule } from './rules/rename-component.rule';
+import { createComponentRule } from './rules/create-component.rule';
 
-export function component(_options: any): Rule {
+export function component(options: Schema): Rule {
   return async (tree: Tree) => {
-    const options = await setProjectOptions(tree, _options);
-    const movePath = normalize(`${options.path}/${strings.dasherize(options.name)}`);
-
-    const templateSource = apply(url('./files'), [
-      applyTemplates({
-        ...strings,
-        ...options,
-      }),
-      move(movePath),
-    ]);
-
-    return chain([
-      externalSchematic('@schematics/angular', 'component', {
-        name: _options.name,
-        project: _options.project,
-        path: _options.path,
-      }),
-      mergeWith(templateSource, MergeStrategy.Overwrite)
-    ]);
+    await setProjectOptions(tree, options);
+    if (options.delete) {
+      return deleteComponentRule(options);
+    } else if (options.rename) {
+      return renameComponentRule(options);
+    } else {
+      return createComponentRule(options);
+    }
   };
 }
 

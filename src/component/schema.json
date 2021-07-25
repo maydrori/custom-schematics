@@ -29,6 +29,16 @@
       "type": "string",
       "default": null,
       "description": "The form name. If specified, include some reactive forms setup"
+    },
+    "delete": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to delete the component files"
+    },
+    "rename": {
+      "type": "string",
+      "default": null,
+      "description": "The new component name"
     }
   },
   "required": [
