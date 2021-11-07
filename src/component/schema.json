@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "simpleSchema",
+  "$id": "simpleSchema",
   "title": "Creates a simple schematic.",
   "type": "object",
   "properties": {
