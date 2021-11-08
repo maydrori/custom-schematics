@@ -17,6 +17,11 @@
       "description": "A blank schematic.",
       "factory": "./hello/index#hello",
       "schema": "./hello/schema.json"
+    },
+    "login-hello": {
+      "description": "A blank schematic.",
+      "factory": "../dummy-app/src/app/login/schematics/hello/index#hello",
+      "schema": "../dummy-app/src/app/login/schematics/hello/schema.json"
     }
   }
 }

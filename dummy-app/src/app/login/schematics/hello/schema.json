@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "simpleSchema",
+  "title": "Creates a simple schematic.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The person name",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    }
+  },
+  "required": [
+    "name"
+  ]
+}
